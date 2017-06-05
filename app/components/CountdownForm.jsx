@@ -14,7 +14,7 @@ var CountdownForm = React.createClass( {
             this.props.onSetCountdown( seconds );
         } else {
             this.refs.time.value = '';
-            this.props.onSetCountdown( 0 );
+            // this.props.onSetCountdown( 0 );
         }
     },
     render: function () {
