@@ -1,4 +1,6 @@
 var React = require( 'react' );
+var Sound = require( 'react-sound' ).default;
+
 var Clock = require( 'Clock' );
 var CountdownForm = require( 'CountdownForm' );
 var Controls = require( 'Controls' );
@@ -42,6 +44,7 @@ var Countdown = React.createClass( {
                 count: newCount > 0 ? newCount : 0
             });
             if ( newCount === 0 ) {
+                clearInterval( this.timer );
                 this.setState( { countdownStatus: 'stopped' } );
             }
         }, 1000 );
@@ -56,7 +59,10 @@ var Countdown = React.createClass( {
         var {count} = this.state;
         var renderControls = () => {
             if ( this.state.countdownStatus === 'stopped' ) {
-                return <CountdownForm onSetCountdown={this.handleSetCountdown}/>;
+                return <div>
+                        <Sound url="http://soundbible.com/mp3/Music_Box-Big_Daddy-1389738694.mp3" playStatus={Sound.status.PLAYING} />
+                        <CountdownForm onSetCountdown={this.handleSetCountdown}/>
+                    </div>;
             } else {
                 return <Controls countdownStatus={this.state.countdownStatus} onStatusChange={this.handleStatusChange}/>;
             }
