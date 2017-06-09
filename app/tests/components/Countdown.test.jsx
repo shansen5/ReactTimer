@@ -16,7 +16,7 @@ describe('Countdown', () => {
             var countdown = TestUtils.renderIntoDocument(<Countdown />);
             countdown.handleSetCountdown(10);
             expect(countdown.state.count).toBe(10);
-            expect(countdown.state.countdownStatus).toBe('started');
+            expect(countdown.state.countingStatus).toBe('started');
             setTimeout(() => {
                 expect(countdown.state.count).toBe(9);
                 done();
@@ -27,7 +27,7 @@ describe('Countdown', () => {
             var countdown = TestUtils.renderIntoDocument(<Countdown />);
             countdown.handleSetCountdown(1);
             expect(countdown.state.count).toBe(1);
-            expect(countdown.state.countdownStatus).toBe('started');
+            expect(countdown.state.countingStatus).toBe('started');
             setTimeout(() => {
                 expect(countdown.state.count).toBe(0);
                 done();
@@ -40,7 +40,7 @@ describe('Countdown', () => {
             countdown.handleStatusChange('paused');
             setTimeout(() => {
                 expect(countdown.state.count).toBe(3);
-                expect(countdown.state.countdownStatus).toBe('paused');
+                expect(countdown.state.countingStatus).toBe('paused');
                 done();
             }, 1001);
         });
@@ -51,7 +51,7 @@ describe('Countdown', () => {
             countdown.handleStatusChange('stopped');
             setTimeout(() => {
                 expect(countdown.state.count).toBe(0);
-                expect(countdown.state.countdownStatus).toBe('stopped');
+                expect(countdown.state.countingStatus).toBe('stopped');
                 done();
             }, 1001);
         });

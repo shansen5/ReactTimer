@@ -9,7 +9,7 @@ var Countdown = React.createClass( {
     getInitialState: function () {
         return { 
             count: 0,
-            countdownStatus: 'stopped'
+            countingStatus: 'stopped'
         };
     },
     handleStatusChange: function ( newStatus ) {
@@ -19,11 +19,11 @@ var Countdown = React.createClass( {
             }
             this.setState({ count: 0 });
         }
-        this.setState({ countdownStatus: newStatus });
+        this.setState({ countingStatus: newStatus });
     },
    componentDidUpdate: function( prevProps, prevState ) {
-        if ( this.state.countdownStatus !== prevState.countdownStatus ) {
-            switch( this.state.countdownStatus ) {
+        if ( this.state.countingStatus !== prevState.countingStatus ) {
+            switch( this.state.countingStatus ) {
                 case 'started':
                     this.startTimer();
                     break;
@@ -45,26 +45,26 @@ var Countdown = React.createClass( {
             });
             if ( newCount === 0 ) {
                 clearInterval( this.timer );
-                this.setState( { countdownStatus: 'stopped' } );
+                this.setState( { countingStatus: 'stopped' } );
             }
         }, 1000 );
     },
     handleSetCountdown: function( seconds ) {
         this.setState( {
             count: seconds,
-            countdownStatus: 'started'
+            countingStatus: 'started'
         });
     },
     render: function () {
         var {count} = this.state;
         var renderControls = () => {
-            if ( this.state.countdownStatus === 'stopped' ) {
+            if ( this.state.countingStatus === 'stopped' ) {
                 return <div>
                         <Sound url="http://soundbible.com/mp3/Music_Box-Big_Daddy-1389738694.mp3" playStatus={Sound.status.PLAYING} />
                         <CountdownForm onSetCountdown={this.handleSetCountdown}/>
                     </div>;
             } else {
-                return <Controls countdownStatus={this.state.countdownStatus} onStatusChange={this.handleStatusChange}/>;
+                return <Controls countingStatus={this.state.countingStatus} onStatusChange={this.handleStatusChange}/>;
             }
         }
         return (
