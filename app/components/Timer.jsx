@@ -41,12 +41,12 @@ var Timer = React.createClass( {
         }, 1000 );
     },
     render: function () {
-        var {count} = this.state;
+        var {count, countingStatus} = this.state;
         return (
             <div>
                 <h1 className="page-title">Timer</h1>
                 <Clock totalSeconds={count}/>
-                <Controls countingStatus={this.state.countingStatus} 
+                <Controls countingStatus={countingStatus} 
                         onStatusChange={this.handleStatusChange}/>
             </div>
         )
